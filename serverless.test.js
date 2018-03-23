@@ -26,7 +26,7 @@ const loadAction = () => {
 
 const runAction = (action, params) => {
   let result = action(params);
-  Promise.resolve(result)
+  return Promise.resolve(result)
   .then(result => console.log(result))
   .catch(error => console.error(error));
 }

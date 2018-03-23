@@ -57,4 +57,11 @@ describe('serverless tests', () => {
       serverless.loadAction().message.should.equal('You are missing the main function in your action file');
     });
   });
+
+  describe('runAction should', () => {
+    const test = () => ({ message: 'HELLO' });
+    it('Return a promise', () => {
+      ('then' in serverless.runAction(test)).should.equal(true);
+    });
+  });
 });
