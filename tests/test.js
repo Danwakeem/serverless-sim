@@ -59,10 +59,14 @@ describe('serverless tests', () => {
   });
 
   describe('runAction should', () => {
+    const test2 = () => Promise.reject({ message: 'Oh no' });
     const test = () => ({ message: 'HELLO' });
     it('Return a promise', () => {
       ('then' in serverless.runAction(test)).should.equal(true);
-      ('catch' in serverless.runAction(test)).should.equal(true);
+    });
+
+    it('Return a failed promise', () => {
+      ('catch' in serverless.runAction(test2)).should.equal(true);
     });
   });
 });
