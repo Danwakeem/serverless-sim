@@ -1,0 +1,25 @@
+{
+  "name": "serverless-test",
+  "version": "1.0.0",
+  "description": "Local testing framework for IBM Cloud Functions",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^5.0.4",
+    "should": "^13.2.1"
+  },
+  "bin": {
+    "serverless-test": "./index.js"
+  },
+  "scripts": {
+    "test": "mocha tests/test.js",
+    "start": "./index.js"
+  },
+  "keywords": [
+    "IBM",
+    "Cloud",
+    "Functions",
+    "Serverless"
+  ],
+  "author": "Danwakeem",
+  "license": "ISC"
+}
