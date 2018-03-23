@@ -1,6 +1,6 @@
 {
   "name": "serverless-test",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Local testing framework for IBM Cloud Functions",
   "dependencies": {},
   "devDependencies": {
@@ -15,7 +15,7 @@
     "test:watch": "mocha tests/test.js --watch",
     "start": "./index.js"
   },
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "https://github.com/Danwakeem/serverless-test"
   },
