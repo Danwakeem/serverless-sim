@@ -62,6 +62,7 @@ describe('serverless tests', () => {
     const test = () => ({ message: 'HELLO' });
     it('Return a promise', () => {
       ('then' in serverless.runAction(test)).should.equal(true);
+      ('catch' in serverless.runAction(test)).should.equal(true);
     });
   });
 });
