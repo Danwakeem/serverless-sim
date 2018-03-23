@@ -12,7 +12,12 @@
   },
   "scripts": {
     "test": "mocha tests/test.js",
+    "test:watch": "mocha tests/test.js --watch",
     "start": "./index.js"
+  },
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/Danwakeem/serverless-test"
   },
   "keywords": [
     "IBM",

@@ -30,4 +30,31 @@ describe('serverless tests', () => {
       serverless.parseArgs().should.deepEqual({ key: undefined, hello: 'world' });
     });
   });
+
+  describe('loadAction should', () => {
+    beforeEach(() => {
+      process.argv = ['', '', './tests/test.function'];
+    });
+
+    it('Return a valid action function', () => {
+      (typeof serverless.loadAction().action === 'function').should.be.true();
+    });
+
+    it('Return an acton of false', () => {
+      process.argv[2] = '';
+      serverless.loadAction().action.should.be.false();
+    });
+
+    it('Return an acton of false and a message of missing function', () => {
+      process.argv[2] = './notAFile';
+      serverless.loadAction().action.should.be.false();
+      serverless.loadAction().message.should.equal('MODULE_NOT_FOUND');
+    });
+
+    it('Return an acton of false and a message of missing function', () => {
+      process.argv[2] = './tests/test.fail';
+      serverless.loadAction().action.should.be.false();
+      serverless.loadAction().message.should.equal('You are missing the main function in your action file');
+    });
+  });
 });

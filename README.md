@@ -3,7 +3,7 @@
 
 This package is a testing framework for testing Node.js [IBM Cloud Functions](https://console.bluemix.net/openwhisk/) actions on your local computer.
 
-#Installation
+# Installation
 `npm i -g serverless-test`
 
 ## Usage

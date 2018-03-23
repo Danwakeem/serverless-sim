@@ -10,6 +10,20 @@ const parseArgs = () => {
   return params;
 }
 
+const loadAction = () => {
+  const actionToRun = process.argv[2];
+  try {
+    const action = require(actionToRun);
+    if ('main' in action) {
+      return { action: action.main };
+    } else {
+      return { action: false, message: 'You are missing the main function in your action file' };
+    }
+  } catch (e) {
+    return { action: false, message: e.code };
+  }
+};
+
 const runAction = (action, params) => {
   let result = action(params);
   Promise.resolve(result)
@@ -19,5 +33,6 @@ const runAction = (action, params) => {
 
 module.exports = {
   parseArgs,
-  runAction
+  runAction,
+  loadAction
 }
