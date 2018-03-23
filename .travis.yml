@@ -3,7 +3,8 @@ node_js:
 - "7" 
 before_script:
 - npm install -g mocha
-script: npm test
+- npm install -g istanbul
+script: npm run travis
 deploy:
   provider: npm
   email: danwakeem@gmail.com

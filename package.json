@@ -4,7 +4,9 @@
   "description": "Local testing framework for IBM Cloud Functions",
   "dependencies": {},
   "devDependencies": {
+    "coveralls": "^3.0.0",
     "mocha": "^5.0.4",
+    "mocha-lcov-reporter": "^1.3.0",
     "should": "^13.2.1"
   },
   "bin": {
@@ -12,6 +14,7 @@
   },
   "scripts": {
     "test": "mocha tests/test.js",
+    "travis": "nyc report --reporter=text-lcov mocha tests/test.js | coveralls",
     "test:watch": "mocha tests/test.js --watch",
     "start": "./index.js"
   },
