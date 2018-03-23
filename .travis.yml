@@ -1,0 +1,11 @@
+language: node_js
+before_script:
+- npm install -g mocha
+script: npm test
+deploy:
+  provider: npm
+  email: danwakeem@gmail.com
+  api_key:
+    secure: L74nxMGis1cDKywfcLBLyG9GZD1A+1c9HMEbS6ND+mkjd1WDYGCYl7CIWFvGBODn+v66fnnn+DgwTmR9hib57Ead61XwPlYheskKYdUBbyJl01to8DNAdts8TCvnFoLN4TEY32kpklmvcgTMdLoU6Wu9zJAplVqCioedjL40df1UmjCQJZg4METzVZJ4C3fSOqay2PSaYM078MO6njoTkEte7YXcTZzwE7HJJrib8zzkf/qxyOKLN1vesKmgmTewiDifgNNGysEZ8I0lWFXz5z0deTgj28/dvUpJa5yomUvrv2HGZCM16sWQgGscJACbWAzDcXYRkbsi0i8rnNdhEjAdx7Pc55ew9kqkWF86k78lmY/xXUUAHbtU9ZUbuoCDPux/vJ+HF6ruorA+DgqfkorhLTA9jMqRwOiJpuy82B87NoVtcjkHzTcpSN+RtyiTqkOMvvUVj2SPcymWL/45xh7qqkieq0Q6EJkYzfRezTYybgbpxi9rm/VrrvB5EZZjrZlJn04kpY1vcW5qv6G8Xe7h34X96SiRzV8LR15l50DRq0kBtZvtDa0YIy0gFECMwoH8GDwEBZZzAQLlA9TggYk1LRj67fW1CZcjvqzZ8wOODQpfSmj1hLBYFbRV9y73i7yA3pe7O/toSG3mgsnuK2BCmVvJ35o5Oh0Ff89HEMM=
+  on:
+    repo: Danwakeem/serverless-sim
