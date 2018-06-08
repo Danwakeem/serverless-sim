@@ -1,7 +1,14 @@
-const parseArgs = () => {
-  const params = {};
-  for(var i=3;i<process.argv.length;i++) {
-    if(/--/gi.test(process.argv[i])) {
+const q = require('q');
+const fs = require('fs');
+
+const parseArgs = (startIndex) => {
+  let params = {};
+  for(var i=startIndex;i<process.argv.length;i++) {
+    if (/--severlessConfig/gi.test(process.argv[i])) {
+      let fileName = process.argv[i+1];
+      let fileParams = JSON.parse(fs.readFileSync(fileName));
+      params = Object.assign({}, params, fileParams);
+    } else if(/--/gi.test(process.argv[i])) {
       let name = process.argv[i+1]
       let value = /--/.test(process.argv[i+2]) ? undefined : process.argv[i+2];
       params[name] = value
@@ -11,24 +18,35 @@ const parseArgs = () => {
 }
 
 const loadAction = () => {
-  const actionToRun = process.argv[2];
-  try {
-    const action = require(actionToRun);
-    if ('main' in action) {
-      return { action: action.main };
-    } else {
-      return { action: false, message: 'You are missing the main function in your action file' };
+  const actionsToRun = [];
+  for(var j=2;j<process.argv.length;j++){
+    try {
+      const actionToRun = process.argv[2];
+      const action = require(actionToRun);
+      if ('main' in action) actionsToRun.push(action.main);
+      else return { action: false, message: 'You are missing the main function in your action file' };
+    } catch (e) {
+      return { action: false, message: e.code };
     }
-  } catch (e) {
-    return { action: false, message: e.code };
   }
+  return { actions: actionsToRun };
 };
 
-const runAction = (action, params) => {
-  let result = action(params);
-  return Promise.resolve(result)
-  .then(result => console.log(result))
-  .catch(error => console.error(error));
+const runAction = (actions, params) => {
+  let chain = q.when();
+  let i = 0;
+
+  for(var z=0; z < actions.length; z++) {
+    chain = chain.then((output) => {
+      params = Object.assign({}, output, params);
+      const func = actions[i++];
+      return func(params);
+    });
+  }
+
+  return chain
+    .then(result => console.log(result))
+    .catch(error => console.error(error));
 }
 
 module.exports = {
