@@ -1,6 +1,6 @@
 {
   "name": "serverless-sim",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Local testing framework for IBM Cloud Functions",
   "dependencies": {
     "q": "^1.5.1"
