@@ -5,7 +5,7 @@ const parseArgs = (startIndex) => {
   let params = {};
   for(var i=startIndex;i<process.argv.length;i++) {
     if (/--severlessConfig/gi.test(process.argv[i])) {
-      let fileName = process.argv[i+1];
+      let fileName = `${process.env.PWD}/${process.argv[i+1]}`;
       let fileParams = JSON.parse(fs.readFileSync(fileName));
       params = Object.assign({}, params, fileParams);
     } else if(/--/gi.test(process.argv[i])) {
@@ -21,7 +21,7 @@ const loadAction = () => {
   const actionsToRun = [];
   for(var j=2;j<process.argv.length;j++){
     try {
-      const actionToRun = process.argv[2];
+      const actionToRun = `${process.env.PWD}/${process.argv[2]}`;
       const action = require(actionToRun);
       if ('main' in action) actionsToRun.push(action.main);
       else return { action: false, message: 'You are missing the main function in your action file' };
