@@ -5,6 +5,8 @@ const parseArgs = (startIndex) => {
   let params = {};
   for(var i=startIndex;i<process.argv.length;i++) {
     if (/--severlessConfig/gi.test(process.argv[i])) {
+      let file = process.argv[i+1];
+      if (/\.\//gi.test(file)) file = file.replace('./', '');
       let fileName = `${process.env.PWD}/${process.argv[i+1]}`;
       let fileParams = JSON.parse(fs.readFileSync(fileName));
       params = Object.assign({}, params, fileParams);
@@ -21,10 +23,15 @@ const loadAction = () => {
   const actionsToRun = [];
   for(var j=2;j<process.argv.length;j++){
     try {
-      const actionToRun = `${process.env.PWD}/${process.argv[2]}`;
-      const action = require(actionToRun);
-      if ('main' in action) actionsToRun.push(action.main);
-      else return { action: false, message: 'You are missing the main function in your action file' };
+      if (/--/gi.test(process.argv[j])) j = process.argv.length;
+      else {
+        let file = process.argv[j];
+        if (/\.\//gi.test(file)) file = file.replace('./', '');
+        const actionToRun = `${process.env.PWD}/${file}`;
+        const action = require(actionToRun);
+        if ('main' in action) actionsToRun.push(action.main);
+        else return { action: false, message: 'You are missing the main function in your action file' };
+      }
     } catch (e) {
       return { action: false, message: e.code };
     }
