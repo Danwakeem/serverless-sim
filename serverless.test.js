@@ -4,7 +4,7 @@ const fs = require('fs');
 const parseArgs = (startIndex) => {
   let params = {};
   for(var i=startIndex;i<process.argv.length;i++) {
-    if (/--severlessConfig/gi.test(process.argv[i])) {
+    if (/--serverlessConfig/gi.test(process.argv[i])) {
       let file = process.argv[i+1];
       if (/\.\//gi.test(file)) file = file.replace('./', '');
       let fileName = `${process.env.PWD}/${process.argv[i+1]}`;
