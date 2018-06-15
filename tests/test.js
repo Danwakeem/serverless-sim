@@ -35,17 +35,17 @@ describe('serverless tests', () => {
     });
 
     it('return params from config file', () => {
-      process.argv.push('./action', '--severlessConfig', './tests/config.test.json');
+      process.argv.push('./action', '--serverlessConfig', './tests/config.test.json');
       serverless.parseArgs(startIndex).should.deepEqual({ config: 'test' });
     });
 
     it('return params from config file and cli params', () => {
-      process.argv.push('./action', '--severlessConfig', './tests/config.test.json', '--param', 'extra', 'krispy');
+      process.argv.push('./action', '--serverlessConfig', './tests/config.test.json', '--param', 'extra', 'krispy');
       serverless.parseArgs(startIndex).should.deepEqual({ config: 'test', extra: 'krispy' });
     });
 
     it('return params from config file and cli params', () => {
-      process.argv.push('./action', '--param', 'extra', 'krispy', '--severlessConfig', './tests/config.test.json');
+      process.argv.push('./action', '--param', 'extra', 'krispy', '--serverlessConfig', './tests/config.test.json');
       serverless.parseArgs(startIndex).should.deepEqual({ config: 'test', extra: 'krispy' });
     });
   });
