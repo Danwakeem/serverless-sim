@@ -32,4 +32,4 @@ The output from the first function will be routed to the second function to simu
 
 ## Change Log
 * `0.1.0` - Added function chain and param file support
-* `0.0.x` - Initial package with single function execution and param flags
+* `0.0.x` - Initial package with single function execution and param flags 
