@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const fs = require('fs');
 const serverlessTest = require('./serverless.test');
 
 if (process.argv.length > 2) {
