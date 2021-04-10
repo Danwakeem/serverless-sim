@@ -5,14 +5,13 @@ const parseArgs = (startIndex) => {
   let params = {};
   for(var i=startIndex;i<process.argv.length;i++) {
     if (/--serverlessConfig/gi.test(process.argv[i])) {
-      let file = process.argv[i+1];
-      if (/\.\//gi.test(file)) file = file.replace('./', '');
-      let fileName = `${process.env.PWD}/${process.argv[i+1]}`;
-      let fileParams = JSON.parse(fs.readFileSync(fileName));
+      const file = process.argv[i+1].replace('./', '');
+      const fileName = `${process.env.PWD}/${file}`;
+      const fileParams = JSON.parse(fs.readFileSync(fileName));
       params = Object.assign({}, params, fileParams);
     } else if(/--/gi.test(process.argv[i])) {
-      let name = process.argv[i+1]
-      let value = /--/.test(process.argv[i+2]) ? undefined : process.argv[i+2];
+      const name = process.argv[i+1]
+      const value = /--/.test(process.argv[i+2]) ? undefined : process.argv[i+2];
       params[name] = value
     }
   }
@@ -25,8 +24,7 @@ const loadAction = () => {
     try {
       if (/--/gi.test(process.argv[j])) j = process.argv.length;
       else {
-        let file = process.argv[j];
-        if (/\.\//gi.test(file)) file = file.replace('./', '');
+        const file = process.argv[j].replace('./', '');
         const actionToRun = `${process.env.PWD}/${file}`;
         const action = require(actionToRun);
         if ('main' in action) actionsToRun.push(action.main);
